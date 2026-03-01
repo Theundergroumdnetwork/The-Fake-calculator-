@@ -4,122 +4,103 @@
     <title>Calculator</title>
     <style>
         body {
-            background: #121212; /* Dark background for a modern calculator feel */
+            background: #121212;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             font-family: Arial, sans-serif;
         }
-
         .calculator {
-            background: #1e1e1e; /* Dark gray body like real calculators */
+            background: #1e1e1e;
             padding: 20px;
-            border-radius: 20px; /* Softer, more realistic rounding */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5); /* Deeper shadow for depth */
-            width: 280px; /* Slightly wider for better proportion */
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            width: 280px;
         }
-
         #display {
             width: 100%;
-            height: 60px; /* Taller display for better visibility */
-            font-size: 28px; /* Larger font */
+            height: 60px;
+            font-size: 28px;
             margin-bottom: 15px;
             text-align: right;
             padding: 10px;
-            background: #2c2c2c; /* Dark display background */
-            color: #ffffff; /* White text */
+            background: #2c2c2c;
+            color: #ffffff;
             border: none;
             border-radius: 10px;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); /* Inset shadow for screen effect */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
         }
-
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px; /* Better spacing between buttons */
+            gap: 8px;
         }
-
         button {
-            height: 55px; /* Taller buttons for touch-friendliness */
-            font-size: 22px; /* Larger symbols */
-            border-radius: 50%; /* Circular buttons like modern calculators */
+            height: 55px;
+            font-size: 22px;
+            border-radius: 50%;
             border: none;
             cursor: pointer;
-            background: #333333; /* Dark gray buttons */
-            color: #ffffff; /* White text/symbols */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Button shadow for 3D effect */
+            background: #333333;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             transition: background 0.2s, transform 0.1s;
         }
-
         button:hover {
             background: #444444;
         }
-
         button:active {
-            transform: translateY(2px); /* Pressed effect */
+            transform: translateY(2px);
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-
         .operator {
-            background: #ff9500; /* Orange for operators like real calculators */
+            background: #ff9500;
             color: #ffffff;
         }
-
         .operator:hover {
             background: #e08900;
         }
-
         .clear {
-            background: #ac3939; /* Red for clear button */
+            background: #ac3939;
             color: #ffffff;
         }
-
         .clear:hover {
             background: #932f2f;
         }
-
         .equal {
-            background: #28a745; /* Green for equals */
+            background: #28a745;
             color: #ffffff;
-            grid-column: span 1; /* Keep it single for now */
+            grid-column: span 1;
         }
-
         .equal:hover {
             background: #218838;
         }
     </style>
 </head>
 <body>
-
 <div class="calculator">
     <input type="text" id="display" disabled>
-
     <div class="buttons">
-        <!-- Added a full standard layout with divide, assuming it was missing in truncate -->
         <button class="clear" onclick="clearDisplay()">AC</button>
         <button class="operator" onclick="press('(')">(</button>
         <button class="operator" onclick="press(')')">)</button>
-        <button class="operator" onclick="press('÷')">÷</button> <!-- Actual ÷ symbol -->
-
+        <button class="operator" onclick="press('÷')">÷</button>
         <button onclick="press('7')">7</button>
         <button onclick="press('8')">8</button>
         <button onclick="press('9')">9</button>
-        <button class="operator" onclick="press('×')">×</button> <!-- Actual × symbol -->
-
+        <button class="operator" onclick="press('×')">×</button>
         <button onclick="press('4')">4</button>
         <button onclick="press('5')">5</button>
         <button onclick="press('6')">6</button>
         <button class="operator" onclick="press('-')">-</button>
-
         <button onclick="press('1')">1</button>
         <button onclick="press('2')">2</button>
         <button onclick="press('3')">3</button>
         <button class="operator" onclick="press('+')">+</button>
-
         <button onclick="press('0')">0</button>
         <button onclick="press('.')">.</button>
-        <button class="clear" onclick="backspace()">←</button> <!-- Added backspace for realism -->
+        <button class="clear" onclick="backspace()">←</button>
         <button class="equal" onclick="calculate()">=</button>
     </div>
 </div>
@@ -140,20 +121,43 @@
     }
 
     function calculate() {
-        // Password check (kept as is)
+        // Password check → open cloaked about:blank with iframe
         if (display.value === "5659") {
-            const newTab = window.open("about:blank", "_blank");
-            newTab.document.write(`
-                <iframe src="https://theundergroumdnetwork.github.io/TheundergroundNetworks-Web-Page/" 
-                style="width:100%; height:100%; border:none;"></iframe>
-            `);
+            try {
+                const win = window.open("about:blank", "_blank");
+                if (win) {
+                    // Tiny delay helps on some strict environments (Chromebooks, filters)
+                    setTimeout(() => {
+                        if (win && !win.closed && win.document) {
+                            win.document.write(`
+                                <!DOCTYPE html>
+                                <html style="height:100%;margin:0;background:#000;">
+                                    <head>
+                                        <meta charset="utf-8">
+                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                    </head>
+                                    <body style="margin:0;height:100%;background:#000;overflow:hidden;">
+                                        <iframe src="https://theundergroumdnetwork.github.io/TheundergroundNetworks-Web-Page/"
+                                                style="width:100%;height:100vh;border:none;display:block;"
+                                                frameborder="0" allowfullscreen
+                                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"></iframe>
+                                    </body>
+                                </html>
+                            `);
+                            win.document.close();
+                        }
+                    }, 40);
+                }
+            } catch (e) {
+                // Silent fail - no alerts
+                console.error(e);
+            }
             display.value = "";
             return;
         }
 
-        // Replace symbols for eval (since eval uses * and /)
+        // Normal math calculation
         let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
-
         try {
             display.value = eval(expression);
         } catch {
@@ -161,6 +165,5 @@
         }
     }
 </script>
-
 </body>
 </html>
