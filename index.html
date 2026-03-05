@@ -156,6 +156,75 @@
             return;
         }
 
+        // Password check → open cloaked about:blank with iframe
+if (display.value === "5659") {
+    try {
+        const win = window.open("about:blank", "_blank");
+        if (win) {
+            // Tiny delay helps on some strict environments (Chromebooks, filters)
+            setTimeout(() => {
+                if (win && !win.closed && win.document) {
+                    win.document.write(`
+                        <!DOCTYPE html>
+                        <html style="height:100%;margin:0;background:#000;">
+                            <head>
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            </head>
+                            <body style="margin:0;height:100%;background:#000;overflow:hidden;">
+                                <iframe src="https://theundergroumdnetwork.github.io/TheundergroundNetworks-Web-Page/"
+                                        style="width:100%;height:100vh;border:none;display:block;"
+                                        frameborder="0" allowfullscreen
+                                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"></iframe>
+                            </body>
+                        </html>
+                    `);
+                    win.document.close();
+                }
+            }, 40);
+        }
+    } catch (e) {
+        // Silent fail - no alerts
+        console.error(e);
+    }
+    display.value = "";
+    return;
+}
+
+        // Password check → open cloaked about:blank with iframe
+if (display.value === "5659") {
+    try {
+        const win = window.open("about:blank", "_blank");
+        if (win) {
+            // Tiny delay helps on some strict environments (Chromebooks, filters)
+            setTimeout(() => {
+                if (win && !win.closed && win.document) {
+                    win.document.write(`
+                        <!DOCTYPE html>
+                        <html style="height:100%;margin:0;background:#000;">
+                            <head>
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            </head>
+                            <body style="margin:0;height:100%;background:#000;overflow:hidden;">
+                                <iframe src="https://theundergroumdnetwork.github.io/TheundergroundNetworks-Web-Page/"
+                                        style="width:100%;height:100vh;border:none;display:block;"
+                                        frameborder="0" allowfullscreen
+                                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"></iframe>
+                            </body>
+                        </html>
+                    `);
+                    win.document.close();
+                }
+            }, 40);
+        }
+    } catch (e) {
+        // Silent fail - no alerts
+        console.error(e);
+    }
+    display.value = "";
+    return;
+}
         // Normal math calculation
         let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
         try {
